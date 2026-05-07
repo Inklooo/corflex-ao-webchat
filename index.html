@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analyseur d'Appels d'Offres - Corflex</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📋</text></svg>">
+    <title>Analyseur d'Appels d'Offres — Corflex</title>
     <style>
         * {
             box-sizing: border-box;
@@ -12,207 +11,156 @@
             padding: 0;
         }
 
-        body {
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #003C71 0%, #0078D4 50%, #0099BC 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+        html, body {
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f3f4f6;
+            color: #1f2937;
         }
 
-        .container {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
-            width: 100%;
-            max-width: 1200px;
-            height: 90vh;
-            max-height: 850px;
+        body {
             display: flex;
             flex-direction: column;
-            overflow: hidden;
         }
 
-        .header {
-            background: linear-gradient(135deg, #003C71 0%, #0066B2 100%);
-            color: white;
-            padding: 24px 36px;
+        header {
+            background: linear-gradient(135deg, #003C71 0%, #0078D4 100%);
+            color: #fff;
+            padding: 18px 32px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 4px solid #0078D4;
+            flex-shrink: 0;
         }
 
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .header-icon {
-            font-size: 36px;
-            background: rgba(255, 255, 255, 0.15);
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .header-text h1 {
+        header h1 {
             font-size: 22px;
             font-weight: 600;
-            margin-bottom: 4px;
+            letter-spacing: 0.2px;
         }
 
-        .header-text p {
+        header .subtitle {
             font-size: 13px;
             opacity: 0.85;
+            margin-top: 2px;
         }
 
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 8px 16px;
-            border-radius: 24px;
-            font-size: 13px;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background: #4ADE80;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        .info-banner {
-            background: #F0F8FF;
-            border-left: 4px solid #0078D4;
-            padding: 16px 36px;
-            font-size: 14px;
-            color: #003C71;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .info-banner .emoji {
-            font-size: 20px;
-        }
-
-        .webchat-wrapper {
-            flex: 1;
-            overflow: hidden;
-            background: #FAFAFA;
-            position: relative;
-        }
-
-        .webchat-wrapper iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: block;
-        }
-
-        .footer {
-            background: #F5F5F5;
-            padding: 12px 36px;
+        .badge {
+            background: rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            padding: 6px 14px;
+            border-radius: 20px;
             font-size: 12px;
-            color: #666;
+            font-weight: 500;
+        }
+
+        .banner {
+            background: #eff6ff;
+            border-left: 4px solid #0078D4;
+            padding: 14px 32px;
+            font-size: 14px;
+            color: #1e3a8a;
+            flex-shrink: 0;
+        }
+
+        .banner strong {
+            color: #003C71;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            padding: 16px;
+            min-height: 0;
+        }
+
+        .chat-container {
+            flex: 1;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        iframe {
+            flex: 1;
+            width: 100%;
+            border: none;
+        }
+
+        footer {
+            background: #1f2937;
+            color: #d1d5db;
             text-align: center;
-            border-top: 1px solid #E5E5E5;
+            padding: 12px;
+            font-size: 12px;
+            flex-shrink: 0;
         }
 
-        .footer a {
-            color: #0078D4;
+        footer a {
+            color: #60a5fa;
             text-decoration: none;
-            font-weight: 600;
         }
 
-        .footer a:hover {
+        footer a:hover {
             text-decoration: underline;
         }
 
-        @media (max-width: 768px) {
-            .container {
-                height: 100vh;
-                max-height: none;
-                border-radius: 0;
+        @media (max-width: 640px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+                padding: 14px 18px;
             }
 
-            body {
-                padding: 0;
-            }
-
-            .header {
-                padding: 16px 20px;
-            }
-
-            .header-text h1 {
+            header h1 {
                 font-size: 18px;
             }
 
-            .header-text p {
-                font-size: 12px;
+            .banner {
+                padding: 12px 18px;
+                font-size: 13px;
             }
 
-            .header-right {
-                display: none;
-            }
-
-            .info-banner {
-                padding: 12px 20px;
-                font-size: 12px;
+            main {
+                padding: 8px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="header-left">
-                <div class="header-icon">📋</div>
-                <div class="header-text">
-                    <h1>Analyseur d'Appels d'Offres</h1>
-                    <p>Cloisons Corflex Inc. — Décision GO / NO-GO automatisée</p>
-                </div>
-            </div>
-            <div class="header-right">
-                <span class="status-dot"></span>
-                <span>Agent en ligne</span>
-            </div>
+    <header>
+        <div>
+            <h1>📋 Analyseur d'Appels d'Offres</h1>
+            <div class="subtitle">Corflex — Pré-tri Go / No-Go assisté par IA</div>
         </div>
+        <div class="badge">Propulsé par Copilot</div>
+    </header>
 
-        <div class="info-banner">
-            <span class="emoji">💡</span>
-            <span>
-                <strong>Comment ça marche ?</strong>
-                Glissez-déposez votre PDF d'appel d'offres dans le chat ci-dessous, ou cliquez sur l'icône 📎 pour le sélectionner. L'analyse prend environ 30 secondes.
-            </span>
-        </div>
+    <div class="banner">
+        <strong>Comment ça marche ?</strong>
+        Glisse ton PDF d'appel d'offres directement dans la zone de chat ci-dessous.
+        L'agent extrait automatiquement les informations clés, compare avec le catalogue Corflex,
+        et te retourne une décision <strong>GO / NO-GO</strong> avec un score de pertinence.
+    </div>
 
-        <div class="webchat-wrapper">
+    <main>
+        <div class="chat-container">
             <iframe
                 src="https://copilotstudio.microsoft.com/environments/1696abdf-c2ac-431d-a9f9-b245787a65bb/bots/cr008_agentjlbDbb/webchat?__version__=2"
-                title="Agent Analyseur AO Corflex"
-                allow="microphone; camera; clipboard-read; clipboard-write">
-            </iframe>
+                title="Analyseur d'Appels d'Offres Corflex"
+                allow="microphone; camera; clipboard-read; clipboard-write"
+            ></iframe>
         </div>
+    </main>
 
-        <div class="footer">
-            Propulsé par <a href="#">Gestisoft</a> &middot; Microsoft Copilot Studio &middot; Azure AI
-        </div>
-    </div>
+    <footer>
+        Propulsé par <a href="https://www.gestisoft.com" target="_blank" rel="noopener">Gestisoft</a>
+        — POC Corflex 2026
+    </footer>
 </body>
 </html>
